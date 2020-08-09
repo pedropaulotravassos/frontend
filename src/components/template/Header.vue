@@ -1,15 +1,23 @@
 <template>
-    <header>
-        <a href="_" class="logo">
+    <header class="header">
+        <router-link to="/" class="logo">
             <img src="..\..\assets\img\logo.png" />
-        </a>
+        </router-link>
+
+        <UserDropdown />
     </header>
 </template>
 
 <script>
+    import UserDropdown from "../user/dropdown/UserDropdown";
     export default {
         name: "Header",
-        components: {},
+        components: { UserDropdown },
+        data() {
+            return {
+                showMenu: false,
+            };
+        },
     };
 </script>
 
@@ -19,7 +27,13 @@
         grid-area: header;
         border-bottom: dashed 2px #436e43f8;
     }
-    .logo img {
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        align-content: center;
+    }
+    .logo {
         height: 100%;
     }
 </style>

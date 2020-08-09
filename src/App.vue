@@ -36,7 +36,7 @@
     }
     #app {
         display: grid;
-        grid-template-rows: 90px 1fr 25px;
+        grid-template-rows: 90px 1fr 40px;
         grid-template-columns: 1fr 25%;
         grid-template-areas:
             "header header"

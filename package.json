@@ -12,8 +12,10 @@
     "bootstrap-vue": "^2.16.0",
     "core-js": "^3.6.5",
     "font-awesome": "^4.7.0",
+    "v-mask": "^2.2.3",
     "vue": "^2.6.11",
-    "vue-router": "^3.4.0"
+    "vue-router": "^3.4.0",
+    "vue-toasted": "^1.1.28"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
