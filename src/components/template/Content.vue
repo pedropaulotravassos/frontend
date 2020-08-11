@@ -14,6 +14,6 @@
     main {
         grid-area: content;
         background-color: #e5ebdd;
-        padding: 50px 20px;
+        padding: 30px 20px 50px 20px;
     }
 </style>

@@ -1,14 +1,14 @@
 <template>
     <div class="Home">
-        <ProdCaroseul />
+        <ProdCarousel />
     </div>
 </template>
 
 <script>
-    import ProdCaroseul from "../prodCaroseul/ProdCaroseul";
+    import ProdCarousel from "../prodCaroseul/ProdCarousel";
     export default {
         components: {
-            ProdCaroseul,
+            ProdCarousel,
         },
     };
 </script>

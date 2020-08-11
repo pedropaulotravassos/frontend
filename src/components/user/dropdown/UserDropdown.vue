@@ -2,9 +2,9 @@
     <div class="user-dropdown" @click="showContent">
         <div class="user-button">
             <div class="user-dropdown-img">
-                <UserAvatar />
+                <UserAvatar :srcAvatar="user.avatar" />
             </div>
-            <span class="d-none d-sm-block">{{user.name}}</span>
+            <span class="d-none d-sm-block mr-2">{{user.name}}</span>
             <i class="fa fa-angle-down"></i>
         </div>
         <div class="user-dropdown-content" v-if="logged">
@@ -18,8 +18,8 @@
                 <i class="fa fa-sign-out"></i> Sair
             </a>
         </div>
-        <div class="user-dropdown-content" v-if="!logged" :class="{visible:isVisible}">
-            <SignIn @clicked="onClickChild"></SignIn>
+        <div class="user-dropdown-content" v-else :class="{visible:isVisible}">
+            <SignIn @on-submmit="onClickChild"></SignIn>
         </div>
     </div>
 </template>
@@ -36,6 +36,7 @@
             return {
                 user: {
                     name: "Sign-In/Sign-Up",
+                    avatar: null,
                 },
                 logged: false,
                 isVisible: false,
@@ -65,6 +66,7 @@
         font-weight: 100;
         height: 100%;
         padding: 0px 20px;
+        text-shadow: 0px 0px 5px black;
     }
 
     .user-dropdown:hover {
@@ -96,6 +98,8 @@
         visibility: hidden;
         opacity: 0;
         transition: visibility 0s, opacity 0.5s linear;
+
+        border-radius: 0 0 5px 5px;
     }
 
     .user-dropdown:hover .user-dropdown-content {

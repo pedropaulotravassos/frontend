@@ -1,5 +1,5 @@
 <template>
-    <b-form @submit="onSubmmit">
+    <b-form>
         <b-form-group label="e-mail">
             <b-form-input type="email" placeholder="email@email.com" required />
         </b-form-group>
@@ -7,9 +7,14 @@
             <b-form-input type="password" required />
         </b-form-group>
 
-        <b-button type="submit" class="sub" variant="success">logar-se</b-button>
+        <div>
+            <b-button @click="onSubmmit" type="submit" class="sub" variant="success">Logar-se</b-button>
 
-        <b-button type="reset" class="res" variant="success">Sign-up</b-button>
+            <router-link to="/signUp" tag="b-button" class="res">Ingressar</router-link>
+        </div>
+        <div class="row-link mb-0">
+            <router-link class="link" to="/reset-password">Esqueci minha senha</router-link>
+        </div>
     </b-form>
 </template>
 
@@ -17,13 +22,23 @@
     export default {
         name: "SignIn",
         methods: {
-            onSubmit(ev) {
-                ev.peventDefault();
-                console.log("teste");
+            onSubmmit() {
+                this.$emit("on-submmit", false);
             },
         },
     };
 </script>
 
 <style>
+    .row-link {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+    .row-link .link {
+        width: 100%;
+        text-align: center;
+        color: rgb(46, 116, 247);
+    }
 </style>

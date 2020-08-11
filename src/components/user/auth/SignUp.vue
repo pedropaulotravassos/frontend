@@ -1,6 +1,6 @@
 <template>
     <div class="signin">
-        <PageTitle class="title" name="Cadastro de usuário" />
+        <PageTitle class="title mt-3" name="Cadastro de usuário" />
         <b-form @submit="onSubmit" @reset="onReset">
             <div class="group pessoal">
                 <div class="row title">
@@ -26,6 +26,18 @@
                         type="email"
                         required
                         placeholder="email@email.com"
+                    />
+                </b-form-group>
+
+                <!-- CPF -->
+                <b-form-group label="Preencha seu CPF:" label-for="cpd" class="cpf">
+                    <b-form-input
+                        id="cpf"
+                        v-model="form.cpf"
+                        type="text"
+                        required
+                        placeholder="999.999.999-99"
+                        v-mask="maskCPF"
                     />
                 </b-form-group>
 
@@ -55,7 +67,7 @@
                 <b-form-group label="Senha" label-for="senha" class="senha">
                     <b-form-input
                         id="senha"
-                        :class="{red:isActive}"
+                        :state="isEquals"
                         v-model="form.senha"
                         type="password"
                         required
@@ -69,7 +81,7 @@
                         v-model="form.confirmarSenha"
                         type="password"
                         required
-                        :class="{red:isActive}"
+                        :state="isEquals"
                     />
                 </b-form-group>
             </div>
@@ -132,11 +144,13 @@
         },
         data() {
             return {
-                isActive: false,
+                isEquals: null,
                 maskCep: "#####-###",
                 maskCel: "(##)#########",
+                maskCPF: "###.###.###-##",
                 form: {
                     nome: "",
+                    cpf: "",
                     email: "",
                     cel: "",
                     dataNascimento: "",
@@ -159,7 +173,7 @@
             onSubmit(evt) {
                 evt.preventDefault();
                 if (this.form.senha != this.confirmarSenha) {
-                    this.isActive = true;
+                    this.isEquals = false;
                 }
                 let payLoad = this.form;
                 payLoad.endereco = { cep: this.endereco.cep };
@@ -228,10 +242,6 @@
         margin-top: 15px;
         padding: 40px;
     }
-    .red {
-        border: solid 1px red;
-    }
-
     .group.end {
         display: flex;
         flex-flow: row wrap;
@@ -249,6 +259,9 @@
     }
     .name {
         grid-area: name;
+    }
+    .cpf {
+        grid-area: cpf;
     }
     .email {
         grid-area: email;
@@ -270,10 +283,11 @@
         grid-template-areas:
             "title title title"
             "name name name"
-            "email telefone dtNasc"
+            "email email email"
+            "cpf telefone dtNasc"
             "senha senha senha "
             "confSenha confSenha confSenha ";
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr;
         align-items: center;
     }
