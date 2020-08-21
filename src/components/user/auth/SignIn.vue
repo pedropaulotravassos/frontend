@@ -1,21 +1,17 @@
 <template>
-    <b-form>
-        <b-form-group label="e-mail">
-            <b-form-input type="email" placeholder="email@email.com" required />
-        </b-form-group>
-        <b-form-group label="senha">
-            <b-form-input type="password" required />
-        </b-form-group>
+    <v-form>
+        <v-text-field type="email" placeholder="Digite seu e-mail" required></v-text-field>
+        <v-text-field type="password" placeholder="Digite sua senha" required />
 
         <div>
-            <b-button @click="onSubmmit" type="submit" class="sub" variant="success">Logar-se</b-button>
+            <v-btn @click="onSubmmit" color="success" type="submit" class="sub" variant="success" />
 
             <router-link to="/signUp" tag="b-button" class="res">Ingressar</router-link>
         </div>
         <div class="row-link mb-0">
             <router-link class="link" to="/reset-password">Esqueci minha senha</router-link>
         </div>
-    </b-form>
+    </v-form>
 </template>
 
 <script>

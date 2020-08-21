@@ -5,8 +5,8 @@ import 'font-awesome/css/font-awesome.css'
 /**IMPORTANDO CONFIGS**/
 import './global'
 import './config/msg'
-import './config/bootstrap'
 import './config/v-mask'
+import './config/vuetify'
 import router from './config/router'
 
 

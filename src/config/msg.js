@@ -22,5 +22,5 @@ Vue.toasted.register(
 Vue.toasted.register(
      'defaultAlert',
      payload => !payload ? 'Redirecionando' : payload,
-     { icon: 'exclamation', duration: 10000, className: 'toast-alert' }
+     { icon: 'exclamation', duration: 1000, className: 'toast-alert' }
 )
