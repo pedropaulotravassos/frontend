@@ -1,10 +1,10 @@
 <template>
-    <div id="app">
+    <v-app id="#app">
         <Header />
         <Content />
         <Aside />
         <Footer />
-    </div>
+    </v-app>
 </template>
 
 <script>
@@ -24,32 +24,19 @@
 </script>
 
 <style>
-    * {
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-            "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    }
-
+    @import url("./assets/css/fonts.css");
     body {
         box-sizing: border-box;
         margin: 0;
         padding: 0.05%;
     }
-    #app {
-        display: grid;
-        grid-template-rows: 90px 1fr 40px;
-        grid-template-columns: 1fr 25%;
-        grid-template-areas:
-            "header header"
-            "content content"
-            "footer footer";
-    }
+
     #app.cart-show {
         grid-template-areas:
             "header header"
             "content aside"
             "footer footer";
     }
-
     .toast-alert {
         box-shadow: none;
         background: linear-gradient(135deg, #ffe603 0%, #e9d521 0%, #ffd82a 0%);

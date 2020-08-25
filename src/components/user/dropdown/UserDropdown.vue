@@ -1,45 +1,42 @@
 <template>
-    <div class="user-dropdown" @click="showContent">
-        <div class="user-button">
-            <div class="user-dropdown-img">
-                <UserAvatar :srcAvatar="user.avatar" />
-            </div>
-            <span class="d-none d-sm-block mr-2">{{user.name}}</span>
-            <i class="fa fa-angle-down"></i>
-        </div>
-        <div class="user-dropdown-content" v-if="logged">
-            <router-link to="/requests">
-                <i class="fa fa-clipboard"></i> Pedidos
-            </router-link>
-            <router-link to="/admin">
-                <i class="fa fa-cogs"></i> Administração
-            </router-link>
-            <a href @click.prevent="logout">
-                <i class="fa fa-sign-out"></i> Sair
-            </a>
-        </div>
-        <div class="user-dropdown-content" v-else :class="{visible:isVisible}">
-            <SignIn @on-submmit="onClickChild"></SignIn>
-        </div>
-    </div>
+    <section>
+        <v-expansion-panels accordion flat class="ml-0 pl-0">
+            <v-expansion-panel>
+                <v-expansion-panel-header class="pa-2">
+                    <v-container class="d-flex align-center">
+                        <v-avatar size="48">
+                            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+                        </v-avatar>
+                        <h4 class="ml-4">Pedro Paulo Medeiros de Mello Travassos</h4>
+                    </v-container>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content class="pa-0 ma-0">
+                    <SignIn @on-submmit="onClickChild" class="pa-0"></SignIn>
+                </v-expansion-panel-content>
+            </v-expansion-panel>
+        </v-expansion-panels>
+
+        <v-divider></v-divider>
+    </section>
 </template>
+
 <script>
-    import UserAvatar from "./UserAvatar";
     import SignIn from "../auth/SignIn";
     export default {
         name: "UserDropdown",
+        props: ["draw"],
         components: {
-            UserAvatar,
             SignIn,
         },
         data() {
             return {
                 user: {
                     name: "Sign-In/Sign-Up",
-                    avatar: null,
+                    avatar:
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTe0Hsu8YYt0Gi6ZxY-aPkV7Os7abmxProPNg&usqp=CAU",
                 },
                 logged: false,
-                isVisible: false,
+                isVisible: this.$props.draw,
             };
         },
         methods: {
@@ -54,73 +51,4 @@
 </script>
 
 <style>
-    .user-dropdown {
-        position: relative;
-        height: 100%;
-    }
-
-    .user-button {
-        display: flex;
-        align-items: center;
-        color: #fff;
-        font-weight: 100;
-        height: 100%;
-        padding: 0px 20px;
-        text-shadow: 0px 0px 5px black;
-    }
-
-    .user-dropdown:hover {
-        background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    .user-dropdown-img {
-        margin: 0px 5px;
-    }
-
-    .user-dropdown-img > img {
-        max-height: 37px;
-        border-radius: 5px;
-    }
-
-    .user-dropdown-content {
-        position: absolute;
-        right: 0px;
-        background-color: #f9f9f9;
-        min-width: 170px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        padding: 10px;
-        z-index: 1;
-
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-
-        visibility: hidden;
-        opacity: 0;
-        transition: visibility 0s, opacity 0.5s linear;
-
-        border-radius: 0 0 5px 5px;
-    }
-
-    .user-dropdown:hover .user-dropdown-content {
-        visibility: visible;
-        opacity: 1;
-    }
-
-    .user-dropdown-content a {
-        text-decoration: none;
-        color: #000;
-        padding: 10px;
-    }
-
-    .user-dropdown-content a:hover {
-        text-decoration: none;
-        color: #000;
-        background-color: #ededed;
-    }
-
-    .visible {
-        visibility: visible;
-        opacity: 1;
-    }
 </style>

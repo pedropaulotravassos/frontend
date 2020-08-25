@@ -1,7 +1,7 @@
 <template>
-    <main>
+    <v-content>
         <router-view></router-view>
-    </main>
+    </v-content>
 </template>
 
 <script>
@@ -12,8 +12,6 @@
 
 <style>
     main {
-        grid-area: content;
-        background-color: #e5ebdd;
-        padding: 30px 20px 50px 20px;
+        background-color: #f2f5ee;
     }
 </style>

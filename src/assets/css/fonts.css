@@ -1,0 +1,12 @@
+@font-face {
+     font-family: lemonada-bold;
+     src: url('../fonts/Lemonada/static/Lemonada-Bold.ttf');
+}
+@font-face {
+     font-family: lemonada-semibold;
+     src: url('../fonts/Lemonada/static/Lemonada-SemiBold.ttf');
+}
+@font-face {
+     font-family: lemonada-medium;
+     src: url('../fonts/Lemonada/static/Lemonada-Medium.ttf');
+}
