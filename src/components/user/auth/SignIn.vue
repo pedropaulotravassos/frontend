@@ -1,29 +1,27 @@
 <template>
     <v-form class="pa-0 ma-0">
-        <v-container class="pa-0 ma-0">
-            <v-row>
-                <v-col cols="12" sm="6">
-                    <v-text-field
-                        v-model="user.email"
-                        :rules="[rules.required, rules.email]"
-                        label="E-mail"
-                    ></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row class="mt-0 pt-0">
-                <v-col cols="12" sm="6" class="pt-0 mt-0">
-                    <v-text-field v-model="email" :rules="[rules.required]" label="Password"></v-text-field>
-                </v-col>
-            </v-row>
-            <v-row class="ma-0 pa-0">
-                <v-col cols="6" class="ma-0 pa-0">
-                    <v-btn class="green darken-2 white--text" @click="onSubmmit">entrar</v-btn>
-                </v-col>
-                <v-col cols="6" class="ma-0 pa-0">
-                    <v-btn class @click="onRouterClick">ingressar</v-btn>
-                </v-col>
-            </v-row>
-        </v-container>
+        <v-text-field
+            v-model="user.email"
+            :rules="[rules.required, rules.email]"
+            label="E-mail"
+            append-icon="mail"
+        ></v-text-field>
+        <v-text-field
+            v-model="user.senha"
+            :rules="[rules.required]"
+            label="Password"
+            append-icon="vpn_key"
+        ></v-text-field>
+
+        <v-row class="ma-0 pa-0">
+            <v-col cols="6" class="ma-0 pa-0">
+                <v-btn class="green darken-2 white--text" @click="onSubmmit">entrar</v-btn>
+            </v-col>
+            <v-col cols="6" class="ma-0 pa-0">
+                <v-btn class @click="onRouterClick">ingressar</v-btn>
+            </v-col>
+        </v-row>
+
         <div class="mt-4 d-flex justify-center row-link">
             <router-link class="text-decoration-none" to="/reset-password">Esqueci minha senha</router-link>
         </div>

@@ -1,135 +1,180 @@
 <template>
-    <div class="signin">
-        <PageTitle class="title mt-3" name="Cadastro de usuário" />
-        <b-form @submit="onSubmit" @reset="onReset">
-            <div class="group pessoal">
-                <div class="row title">
-                    <h3>Dados Pessoais</h3>
-                </div>
-                <hr />
-                <!-- NOME -->
-                <b-form-group label="Preencha seu nome:" label-for="nome" class="name">
-                    <b-form-input
-                        id="nome"
-                        v-model="form.nome"
-                        type="text"
-                        required
-                        placeholder="Nome"
-                    />
-                </b-form-group>
+    <div class="signin group mt-2 my-1 amber lighten-5">
+        <!-- <div class="d-flex justify-end my-0 "> -->
+        <!-- <v-btn icon x-large>
+            <v-icon right>clear</v-icon>
+        </v-btn>-->
+        <!-- </div> -->
+        <v-btn icon x-large color="deep-orange" class="float-right" @click="outClick">
+            <v-icon>clear</v-icon>
+        </v-btn>
+        <PageTitle class="title mt-4" title="Cadastro de usuário" />
 
-                <!-- EMAIL -->
-                <b-form-group label="Preencha seu e-mail:" label-for="email" class="email">
-                    <b-form-input
-                        id="email"
-                        v-model="form.email"
-                        type="email"
-                        required
-                        placeholder="email@email.com"
-                    />
-                </b-form-group>
+        <v-form @submit="onSubmit">
+            <h2 class>Dados Pessoais</h2>
+            <v-layout>
+                <v-row>
+                    <!-- NOME -->
+                    <v-col cols="12" md="6">
+                        <v-text-field
+                            v-model="form.nome"
+                            type="text"
+                            :rules="[rules.required]"
+                            placeholder="Digite seu nome"
+                            label="Nome"
+                        />
+                    </v-col>
+                    <!-- EMAIL -->
+                    <v-col cols="12" md="6">
+                        <v-text-field
+                            v-model="form.email"
+                            type="email"
+                            :rules="[rules.required, rules.email]"
+                            placeholder="email@email.com"
+                            label="E-mail"
+                        />
+                    </v-col>
+                    <!-- CPF -->
+                    <v-col cols="12" sm="4">
+                        <v-text-field
+                            v-model="form.cpf"
+                            type="text"
+                            :rules="[rules.required]"
+                            placeholder="999.999.999-99"
+                            v-mask="maskCPF"
+                            label="CPF"
+                        />
+                    </v-col>
+                    <!-- TELEFONE(CEL) -->
+                    <v-col cols="12" sm="4">
+                        <v-text-field
+                            label="Celular"
+                            v-model="form.cel"
+                            type="text"
+                            :rules="[rules.required]"
+                            v-mask="maskCel"
+                            placeholder="(11)999999999"
+                        />
+                    </v-col>
+                    <!-- DATA DE NASCIMENTO -->
+                    <v-col cols="12" sm="4">
+                        <v-text-field
+                            label="Data de nascimento"
+                            v-model="form.dataNascimento"
+                            type="date"
+                            :rules="[rules.required]"
+                        />
+                    </v-col>
+                    <!-- SENHA -->
+                    <v-col cols="12" sm="6">
+                        <v-text-field
+                            label="Senha"
+                            :state="isEquals"
+                            v-model="form.senha"
+                            type="password"
+                            placeholder="Digite a senha"
+                            :rules="[rules.required,rules.equalPassword(this.form.confirmarSenha, this.form.senha)]"
+                        />
+                    </v-col>
+                    <!-- CONFIRMAR SENHA -->
+                    <v-col cols="12" sm="6">
+                        <v-text-field
+                            label="Confirmar senha"
+                            v-model="form.confirmarSenha"
+                            type="password"
+                            :rules="[rules.required,rules.equalPassword(this.form.confirmarSenha, this.form.senha)]"
+                            :state="isEquals"
+                            placeholder="Confirme a senha"
+                        />
+                    </v-col>
+                </v-row>
+            </v-layout>
 
-                <!-- CPF -->
-                <b-form-group label="Preencha seu CPF:" label-for="cpd" class="cpf">
-                    <b-form-input
-                        id="cpf"
-                        v-model="form.cpf"
-                        type="text"
-                        required
-                        placeholder="999.999.999-99"
-                        v-mask="maskCPF"
-                    />
-                </b-form-group>
-
-                <!-- TELEFONE(CEL) -->
-                <b-form-group label="Telefone:" class="telefone">
-                    <b-form-input
-                        id="cel"
-                        v-model="form.cel"
-                        type="text"
-                        required
-                        v-mask="maskCel"
-                        placeholder="(11)999999999"
-                    />
-                </b-form-group>
-
-                <!-- DATA DE NASCIMENTO -->
-                <b-form-group label="Data de nascimento:" class="dtNasc">
-                    <b-form-input
-                        id="dtNascimento"
-                        v-model="form.dataNascimento"
-                        type="date"
-                        required
-                    />
-                </b-form-group>
-
-                <!-- SENHA -->
-                <b-form-group label="Senha" label-for="senha" class="senha">
-                    <b-form-input
-                        id="senha"
-                        :state="isEquals"
-                        v-model="form.senha"
-                        type="password"
-                        required
-                    />
-                </b-form-group>
-
-                <!-- CONFIRMAR SENHA -->
-                <b-form-group label="Confirmar senha" label-for="confSenha" class="confSenha">
-                    <b-form-input
-                        id="confSenha"
-                        v-model="form.confirmarSenha"
-                        type="password"
-                        required
-                        :state="isEquals"
-                    />
-                </b-form-group>
-            </div>
-            <div class="group end">
-                <h3 class="title">Endereço</h3>
-                <hr />
-                <div class="row">
-                    <!-- CEP -->
-                    <b-form-group label="CEP" class="row-item">
-                        <b-form-input
+            <h2 class="mt-4 my-4">Endereço</h2>
+            <!-- CEP -->
+            <v-layout>
+                <v-row>
+                    <v-col cols="12" sm="4">
+                        <v-text-field
+                            label="CEP"
                             type="text"
                             @keyup="buscaCep()"
                             v-model="endereco.cep"
-                            required
+                            :rules="[rules.required]"
                             v-mask="maskCep"
                             placeholder="00000-000"
                         />
-                    </b-form-group>
+                    </v-col>
                     <!-- COMPLEMENTO -->
-                    <b-form-group label="Número" class="row-item">
-                        <b-form-input type="text" v-model="endereco.numero" required />
-                    </b-form-group>
-                    <b-form-group label="Complemento" class="row-item">
-                        <b-form-input type="text" v-model="endereco.comp" required />
-                    </b-form-group>
-                </div>
-                <div class="row">
-                    <b-form-group label="Logradouro" class="row-item">
-                        <b-form-input type="text" v-model="endereco.logradouro" required disabled />
-                    </b-form-group>
-                </div>
-                <div class="row">
-                    <b-form-group label="Bairro" class="row-item">
-                        <b-form-input type="text" v-model="endereco.bairro" required disabled />
-                    </b-form-group>
-                    <b-form-group label="Cidade" class="row-item">
-                        <b-form-input type="text" v-model="endereco.localidade" required disabled />
-                    </b-form-group>
-                    <b-form-group label="UF" class="row-item">
-                        <b-form-input type="text" v-model="endereco.uf" required disabled />
-                    </b-form-group>
-                </div>
-            </div>
-            <div class="group buttons">
-                <b-button type="submit" class="sub" variant="success">Cadastrar-se</b-button>
-                <b-button type="reset" class="res" variant="danger">Cancelar</b-button>
-            </div>
-        </b-form>
+                    <v-col cols="12" sm="3">
+                        <v-text-field
+                            type="text"
+                            v-model="endereco.numero"
+                            label="Número"
+                            placeholder=" "
+                            :rules="[rules.required]"
+                        />
+                    </v-col>
+                    <v-col cols="12" sm="4">
+                        <v-text-field
+                            type="text"
+                            v-model="endereco.comp"
+                            :rules="[rules.required]"
+                            placeholder=" "
+                            label="Complemento"
+                        />
+                    </v-col>
+                    <v-col cols="12" sm="5">
+                        <v-text-field
+                            type="text"
+                            label="Logradouro"
+                            placeholder=" "
+                            v-model="endereco.logradouro"
+                            :rules="[rules.required]"
+                            disabled
+                        />
+                    </v-col>
+                    <v-col cols="12" sm="4">
+                        <v-text-field
+                            type="text"
+                            label="Bairro"
+                            placeholder=" "
+                            v-model="endereco.bairro"
+                            :rules="[rules.required]"
+                            disabled
+                        />
+                    </v-col>
+                    <v-col cols="12" sm="2">
+                        <v-text-field
+                            type="text"
+                            placeholder=" "
+                            label="Cidade"
+                            v-model="endereco.localidade"
+                            :rules="[rules.required]"
+                            disabled
+                        />
+                    </v-col>
+                    <v-col cols="12" sm="1">
+                        <v-text-field
+                            label="UF"
+                            placeholder=" "
+                            type="text"
+                            v-model="endereco.uf"
+                            :rules="[rules.required]"
+                            disabled
+                        />
+                    </v-col>
+                </v-row>
+            </v-layout>
+            <v-layout class="d-flex justify-space-around">
+                <v-btn type="submit" class="green lighten-1 white--text flex-md-grow-1">Cadastrar-se</v-btn>
+                <v-btn
+                    @click="onReset"
+                    type="reset"
+                    class="red lighten-1 white--text ml-2 flex-md-grow-1"
+                >Cancelar</v-btn>
+            </v-layout>
+        </v-form>
     </div>
 </template>
 
@@ -144,7 +189,6 @@
         },
         data() {
             return {
-                isEquals: null,
                 maskCep: "#####-###",
                 maskCel: "(##)#########",
                 maskCPF: "###.###.###-##",
@@ -166,6 +210,17 @@
                     localidade: "",
                     uf: "",
                 },
+
+                rules: {
+                    required: (value) => !!value || "Required.",
+                    counter: (value) => value.length <= 20 || "Max 20 characters",
+                    email: (value) => {
+                        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        return pattern.test(value) || "Invalid e-mail.";
+                    },
+                    equalPassword: (value, valueProbe) =>
+                        value == valueProbe || "Senhas não conferem",
+                },
             };
         },
 
@@ -173,7 +228,7 @@
             onSubmit(evt) {
                 evt.preventDefault();
                 if (this.form.senha != this.confirmarSenha) {
-                    this.isEquals = false;
+                    this.$toasted.defaultError();
                 }
                 let payLoad = this.form;
                 payLoad.endereco = { cep: this.endereco.cep };
@@ -206,7 +261,17 @@
                 this.endereco.bairro = "";
                 this.endereco.localidade = "";
                 this.endereco.uf = "";
+                this.$toasted.show("Redirecionando !!", {
+                    theme: "outline",
+                    position: "top-right",
+                    duration: 1000,
+                });
+                this.$router.push("/");
             },
+            // outClick() {
+            //     this.$router.push("/");
+            // },
+
             buscaCep() {
                 if (this.endereco.cep.length == 9) {
                     const config = {
@@ -236,70 +301,9 @@
         margin-bottom: 45px;
     }
     .group {
-        background: lemonchiffon;
-        border-radius: 20px;
+        /* background: lemonchiffon; */
         box-shadow: 10px 10px 30px rgb(153, 151, 151);
         margin-top: 15px;
         padding: 40px;
-    }
-    .group.end {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-    }
-    .row {
-        display: flex;
-        flex-grow: 1;
-        justify-content: space-between;
-    }
-    .row.title {
-        margin-bottom: 15px;
-        margin-left: 10px;
-        grid-area: title;
-    }
-    .name {
-        grid-area: name;
-    }
-    .cpf {
-        grid-area: cpf;
-    }
-    .email {
-        grid-area: email;
-    }
-    .telefone {
-        grid-area: telefone;
-    }
-    .dtNasc {
-        grid-area: dtNasc;
-    }
-    .senha {
-        grid-area: senha;
-    }
-    .confSenha {
-        grid-area: confSenha;
-    }
-    .group.pessoal {
-        display: grid;
-        grid-template-areas:
-            "title title title"
-            "name name name"
-            "email email email"
-            "cpf telefone dtNasc"
-            "senha senha senha "
-            "confSenha confSenha confSenha ";
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-        grid-template-columns: 1fr 1fr 1fr;
-        align-items: center;
-    }
-    .sub {
-        width: 47%;
-    }
-    .res {
-        margin-left: 5%;
-        width: 47%;
-    }
-    .row-item {
-        flex-grow: 1;
-        margin-right: 2%;
     }
 </style>

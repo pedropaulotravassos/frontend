@@ -3,7 +3,7 @@
         <v-toolbar app class="header">
             <v-app-bar-nav-icon @click="showMenu =!showMenu"></v-app-bar-nav-icon>
             <v-spacer></v-spacer>
-            <router-link to="/">
+            <router-link to="/" class="text-decoration-none">
                 <div class="d-flex justify-center align-center">
                     <v-img class="logo" src="..\..\assets\img\logo.png" />
                     <v-toolbar-title class="ml-4 grey--text text--darken-3 company-name">Dona Fruta</v-toolbar-title>

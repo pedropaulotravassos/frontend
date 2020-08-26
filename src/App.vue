@@ -31,12 +31,6 @@
         padding: 0.05%;
     }
 
-    #app.cart-show {
-        grid-template-areas:
-            "header header"
-            "content aside"
-            "footer footer";
-    }
     .toast-alert {
         box-shadow: none;
         background: linear-gradient(135deg, #ffe603 0%, #e9d521 0%, #ffd82a 0%);

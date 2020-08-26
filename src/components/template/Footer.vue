@@ -14,8 +14,16 @@
                 </div>
                 <v-spacer></v-spacer>
 
-                <v-btn color="black" v-for="icon in icons" :key="icon" class="mx-4" dark icon>
-                    <v-icon size="24px">{{ icon }}</v-icon>
+                <v-btn
+                    color="black"
+                    v-for="btn in buttons"
+                    :key="btn.icon"
+                    :href="btn.route"
+                    class="mx-4"
+                    dark
+                    icon
+                >
+                    <v-icon size="24px">{{ btn.icon }}</v-icon>
                 </v-btn>
             </v-card-title>
         </v-card>
@@ -26,7 +34,20 @@
     export default {
         name: "Footer",
         data: () => ({
-            icons: ["mdi-facebook", "mdi-instagram", "mdi-linkedin", "mdi-git"],
+            buttons: [
+                {
+                    icon: "mdi-facebook",
+                    route: "https://www.facebook.com/Donna.frutas2",
+                },
+                {
+                    icon: "mdi-instagram",
+                    route: "https://www.instagram.com/donna.fruta/",
+                },
+                {
+                    icon: "mdi-git",
+                    route: "https://github.com/pedropaulotravassos",
+                },
+            ],
         }),
     };
 </script>

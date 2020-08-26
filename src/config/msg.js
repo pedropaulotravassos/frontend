@@ -24,3 +24,4 @@ Vue.toasted.register(
      payload => !payload ? 'Redirecionando' : payload,
      { icon: 'exclamation', duration: 1000, className: 'toast-alert' }
 )
+
