@@ -64,7 +64,7 @@
                     {
                         icon: "dashboard",
                         title: "Departamentos",
-                        route: "/departmes",
+                        route: "/new-department",
                     },
                 ],
             };

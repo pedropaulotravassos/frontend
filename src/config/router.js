@@ -6,8 +6,9 @@ import SignUp from '../components/user/auth/SignUp.vue'
 import Home from '../components/home/Home.vue'
 import ResetPassword from '../components/user/auth/ResetPassword.vue'
 
+
 /** IMPORT DE PÁGINAS ADMS **/
-import NewDepartment from '../components/admin/department/NewDepartment.vue'
+import Department from '../components/admin/department/Department.vue'
 import NewCategory from '../components/admin/category/NewCategory.vue'
 
 Vue.use(VueRouter)
@@ -29,10 +30,11 @@ const routes = [
           component: ResetPassword
      },
      {
-          name: 'newDepartment',
+          name: 'department',
           path: '/new-department',
-          component: NewDepartment
+          component: Department
      },
+
      {
           name: 'newCategory',
           path: '/new-category',
