@@ -20,7 +20,7 @@
             <UserDropdown :draw="items" />
 
             <v-list dense>
-                <v-list-item v-for="item in items" :key="item.title" link>
+                <v-list-item v-for="item in items" :key="item.title" :to="item.route">
                     <v-list-item-icon>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-icon>
@@ -57,12 +57,14 @@
                 showCart: false,
                 items: [
                     {
-                        icon: "dashboard",
-                        title: "teste",
+                        icon: "home",
+                        title: "Home",
+                        route: "/",
                     },
                     {
-                        icon: "menu",
-                        title: "menu",
+                        icon: "dashboard",
+                        title: "Departamentos",
+                        route: "/departmes",
                     },
                 ],
             };

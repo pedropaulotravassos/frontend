@@ -1,13 +1,6 @@
 <template>
     <div class="signin group mt-2 my-1 amber lighten-5">
-        <!-- <div class="d-flex justify-end my-0 "> -->
-        <!-- <v-btn icon x-large>
-            <v-icon right>clear</v-icon>
-        </v-btn>-->
-        <!-- </div> -->
-        <v-btn icon x-large color="deep-orange" class="float-right" @click="outClick">
-            <v-icon>clear</v-icon>
-        </v-btn>
+        <CloseCross routeTo="/" />
         <PageTitle class="title mt-4" title="Cadastro de usuário" />
 
         <v-form @submit="onSubmit">
@@ -167,12 +160,18 @@
                 </v-row>
             </v-layout>
             <v-layout class="d-flex justify-space-around">
-                <v-btn type="submit" class="green lighten-1 white--text flex-md-grow-1">Cadastrar-se</v-btn>
+                <v-btn type="submit" class="green lighten-1 white--text flex-md-grow-1">
+                    <v-icon>how_to_reg</v-icon>
+                    <span class="ml-2">Cadastrar-se</span>
+                </v-btn>
                 <v-btn
                     @click="onReset"
                     type="reset"
                     class="red lighten-1 white--text ml-2 flex-md-grow-1"
-                >Cancelar</v-btn>
+                >
+                    <v-icon>cancel</v-icon>
+                    <span class="ml-2">Cancelar</span>
+                </v-btn>
             </v-layout>
         </v-form>
     </div>
@@ -180,12 +179,14 @@
 
 <script>
     import PageTitle from "../../template/PageTitle";
+    import CloseCross from "../../template/CloseCross";
     import axios from "axios";
     import { baseUrlApiUsuario } from "../../../global";
     export default {
         name: "SignIn",
         components: {
             PageTitle,
+            CloseCross,
         },
         data() {
             return {
@@ -261,17 +262,13 @@
                 this.endereco.bairro = "";
                 this.endereco.localidade = "";
                 this.endereco.uf = "";
-                this.$toasted.show("Redirecionando !!", {
+                this.$toasted.show("Redirecionado.. !!", {
                     theme: "outline",
                     position: "top-right",
-                    duration: 1000,
+                    duration: 700,
                 });
                 this.$router.push("/");
             },
-            // outClick() {
-            //     this.$router.push("/");
-            // },
-
             buscaCep() {
                 if (this.endereco.cep.length == 9) {
                     const config = {

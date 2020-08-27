@@ -4,10 +4,10 @@
             <v-expansion-panel>
                 <v-expansion-panel-header class="pa-2">
                     <v-container class="d-flex align-center">
-                        <v-avatar size="48">
-                            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+                        <v-avatar size="48" class="grey lighten-2">
+                            <v-img :src="user.avatar"></v-img>
                         </v-avatar>
-                        <h4 class="ml-4">Pedro Paulo Medeiros de Mello Travassos</h4>
+                        <h4 class="ml-4">{{user.name}}</h4>
                     </v-container>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class="pa-0 ma-0">
