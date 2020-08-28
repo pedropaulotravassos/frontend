@@ -8,8 +8,9 @@ import ResetPassword from '../components/user/auth/ResetPassword.vue'
 
 
 /** IMPORT DE PÁGINAS ADMS **/
+import AdminMenu from '../components/admin/AdminMenu.vue'
 import Department from '../components/admin/department/Department.vue'
-import NewCategory from '../components/admin/category/NewCategory.vue'
+import Category from '../components/admin/category/Category.vue'
 
 Vue.use(VueRouter)
 
@@ -31,14 +32,19 @@ const routes = [
      },
      {
           name: 'department',
-          path: '/new-department',
+          path: '/admin/department',
           component: Department
      },
 
      {
-          name: 'newCategory',
-          path: '/new-category',
-          component: NewCategory
+          name: 'category',
+          path: '/admin/category',
+          component: Category
+     },
+     {
+          name: 'admin',
+          path: '/admin',
+          component: AdminMenu
      }
 ]
 

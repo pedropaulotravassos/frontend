@@ -63,8 +63,8 @@
                     },
                     {
                         icon: "dashboard",
-                        title: "Departamentos",
-                        route: "/new-department",
+                        title: "Admin",
+                        route: "/admin",
                     },
                 ],
             };

@@ -1,6 +1,6 @@
 <template>
     <div class="new-department group mt-1">
-        <CloseCross routeTo="/" />
+        <CloseCross routeTo="/admin" />
         <PageTitle class="mt-2" title="Departamentos" />
         <v-form class="mt-4 my-2 black--text">
             <v-container fluid>
@@ -70,16 +70,13 @@
         },
         methods: {
             async saveNewDpto() {
-                console.log(!this.department);
-                console.log("teste");
-                if (!this.department) {
-                    this.$toasted.show(
-                        "Por-favor, preencha todas as informações necessárias",
-                        {
-                            theme: "outline",
-                            position: "top-right",
-                            duration: 1200,
-                        }
+                if (
+                    !this.department.codigo ||
+                    !this.department.nome ||
+                    !this.department.descricao
+                ) {
+                    this.$toasted.global.defaultAlert(
+                        "Por-favor, preencha todas as informações necessárias"
                     );
                 }
 
@@ -102,5 +99,8 @@
 
     .row button {
         flex-grow: 1;
+    }
+    .toastedWarning {
+        background-color: yellow;
     }
 </style>

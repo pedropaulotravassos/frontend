@@ -1,28 +1,38 @@
 <template>
-    <div class="reset-password">
+    <div class="mt-1 reset-password">
         <div>
             <div class="row title">
-                <h3>Esqueci minha senha!</h3>
+                <PageTitle title="Esqueci minha senha!" />
             </div>
-            <b-form class="mt-5" @submit="onSubmit" @reset="onReset">
-                <b-form-group label="Email">
-                    <b-form-input
-                        type="email"
-                        v-model="form.email"
-                        required
-                        placeholder="email@email.com"
-                    ></b-form-input>
-                </b-form-group>
-                <b-form-group class="mt-5">
-                    <b-button type="submit" class="sub" variant="success">Gerar nova Senha</b-button>
-                    <b-button type="reset" class="res" variant="danger">Cancelar</b-button>
-                </b-form-group>
-            </b-form>
+            <v-form class="mt-5" @submit="onSubmit" @reset="onReset">
+                <v-container>
+                    <v-row>
+                        <v-col cols="12">
+                            <v-text-field type="email" label="E-mail" v-model="form.email" required></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                            <div class="d-flex justify-space-around">
+                                <v-btn class="mr-4 flex-grow-1" type="submit" color="success">
+                                    <v-icon>refresh</v-icon>
+                                    <span class="ml-4">Gerar nova Senha</span>
+                                </v-btn>
+                                <v-btn type="reset" class="flex-grow-1" color="warning">
+                                    <v-icon>cancel</v-icon>
+                                    <span class="ml-4">Cancelar</span>
+                                </v-btn>
+                            </div>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-form>
         </div>
     </div>
 </template>
 
 <script>
+    import PageTitle from "../../template/PageTitle";
     import axios from "axios";
     import { baseUrlApiUsuario } from "../../../global";
     const config = {
@@ -34,6 +44,7 @@
     };
     export default {
         name: "resetPassword",
+        components: { PageTitle },
         data() {
             return {
                 form: {
@@ -67,7 +78,7 @@
         background: lemonchiffon;
         border-radius: 20px;
         box-shadow: 10px 10px 30px rgb(153, 151, 151);
-        margin-top: 15px;
+
         padding: 40px;
     }
     .row-title {
