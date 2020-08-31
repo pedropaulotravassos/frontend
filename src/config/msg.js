@@ -11,7 +11,7 @@ Vue.use(Toasted, {
 Vue.toasted.register(
      'defaultSuccess',
      payload => !payload ? 'Operação realizada com sucesso' : payload,
-     { type: 'success', icon: 'check' }
+     { type: 'success', icon: 'check', duration: 2500 }
 )
 
 Vue.toasted.register(
