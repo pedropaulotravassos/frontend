@@ -211,6 +211,7 @@
                             "Por favor preencha os campos, requeridos para salvar"
                         );
                     } else {
+                        this.dbSave(this.editedItem);
                         Object.assign(
                             this.categories[this.editedIndex],
                             this.editedItem
@@ -222,10 +223,6 @@
                         this.editedItem.nome,
                         this.editedItem.departamento)
                     ) {
-                        this.editedItem.codDpto = this.editedItem.departamento
-                            .split("-")[0]
-                            .trim();
-
                         this.dbSave(this.editedItem);
                     } else {
                         this.$toasted.global.defaultAlert(
@@ -237,6 +234,8 @@
             },
 
             dbSave(payload) {
+                payload.codDpto = payload.departamento.split("-")[0].trim();
+
                 axios.post(`${baseUrlApiCategoria}/salvar`, payload).then((res) => {
                     console.log(res.data);
                     this.$toasted.global.defaultSuccess(
