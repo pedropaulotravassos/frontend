@@ -11,6 +11,7 @@ import ResetPassword from '../components/user/auth/ResetPassword.vue'
 import AdminMenu from '../components/admin/AdminMenu.vue'
 import Department from '../components/admin/department/Department.vue'
 import Category from '../components/admin/category/Category.vue'
+import NewProduct from '../components/admin/product/NewProd.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
           name: 'admin',
           path: '/admin',
           component: AdminMenu
+     },
+     {
+          name: 'admin',
+          path: '/admin/product',
+          component: NewProduct
      }
 ]
 

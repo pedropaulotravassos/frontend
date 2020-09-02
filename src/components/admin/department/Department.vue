@@ -1,16 +1,17 @@
 <template>
     <div class="new-department group mt-1">
-        <CloseCross routeTo="/admin" />
-        <PageTitle class="mt-2" title="Departamentos" />
-        <v-form class="mt-4 my-2 black--text">
+        <!-- <CloseCross routeTo @click="formShow = !formShow" /> -->
+        <!-- <PageTitle class="mt-2" title="Departamentos" /> -->
+        <v-form class="mt-4 my-2 black--text" v-show="formShow">
             <v-container fluid>
-                <v-row>
+                <v-row class="mt-10">
                     <v-col cols="12" md="5">
                         <v-text-field
                             v-model="department.codigo"
                             label="Código"
                             type="text"
                             maxlength="4"
+                            :disabled="editMode"
                         ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="7">
@@ -32,30 +33,30 @@
                         <v-icon>save</v-icon>
                         <span class="ml-2">Salvar</span>
                     </v-btn>
-                    <v-btn color="red lighten-1 white--text">
+                    <v-btn color="red lighten-1 white--text" @click="cancel">
                         <v-icon>cancel</v-icon>
                         <span class="ml-2">Cancelar</span>
                     </v-btn>
                 </div>
             </v-container>
         </v-form>
-        <hr class="mt-5 my-6" />
+        <!-- <hr class="mt-5 my-6" /> -->
 
-        <ListDepartments />
+        <ListDepartments v-on:editClick="edit" v-on:newdepto="newBtn" :newBtnToogle="formShow" />
     </div>
 </template>
 
 
 <script>
-    import PageTitle from "../../template/PageTitle";
-    import CloseCross from "../../template/CloseCross";
+    // import PageTitle from "../../template/PageTitle";
+    // import CloseCross from "../../template/CloseCross";
     import ListDepartments from "./ListDepartments";
 
     import axios from "axios";
     import { baseUrlApiDepartamento } from "../../../global";
     export default {
         name: "newDepartment",
-        components: { PageTitle, CloseCross, ListDepartments },
+        components: { ListDepartments },
         data() {
             return {
                 rules: {
@@ -66,10 +67,12 @@
                     nome: "",
                     descricao: "",
                 },
+                editMode: false,
+                formShow: false,
             };
         },
         methods: {
-            async saveNewDpto() {
+            saveNewDpto() {
                 if (
                     !this.department.codigo ||
                     !this.department.nome ||
@@ -80,9 +83,28 @@
                     );
                 }
 
-                await axios
+                axios
                     .post(`${baseUrlApiDepartamento}/salvar`, this.department)
-                    .then((res) => console.log(res.data));
+                    .then((res) => {
+                        this.$toasted.global.defaultSuccess(res.data);
+                    });
+            },
+            edit(value) {
+                this.editMode = true;
+                this.formShow = true;
+                this.department = value;
+            },
+
+            cancel() {
+                this.editMode = false;
+                this.formShow = false;
+                this.department = {};
+            },
+
+            newBtn() {
+                this.editMode = false;
+                this.department = {};
+                this.formShow = !this.formShow;
             },
         },
     };
@@ -92,7 +114,7 @@
 <style>
     .group {
         background: lemonchiffon;
-        box-shadow: 10px 10px 30px rgb(153, 151, 151);
+        /* box-shadow: 10px 10px 30px rgb(153, 151, 151); */
         margin-top: 15px;
         padding: 40px;
     }

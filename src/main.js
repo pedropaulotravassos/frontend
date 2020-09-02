@@ -6,6 +6,7 @@ import 'font-awesome/css/font-awesome.css'
 import './global'
 import './config/msg'
 import './config/v-mask'
+import './config/vueDropzone'
 import router from './config/router'
 import vuetify from './plugins/vuetify';
 
